@@ -1,0 +1,14 @@
+package com.zyh.cloud;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+/**
+ * SpringBoot Config客户端
+ */
+@SpringBootApplication
+public class ConfigClient_3355_StartSpringCloudApp {
+    public static void main(String[] args) {
+        SpringApplication.run(ConfigClient_3355_StartSpringCloudApp.class, args);
+    }
+}

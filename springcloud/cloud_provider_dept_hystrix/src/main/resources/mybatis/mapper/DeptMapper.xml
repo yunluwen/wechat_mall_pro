@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zyh.cloud.dao.DeptDao">
+
+	<!--注意这里因为使用maven的聚合工程，指定查询的返回值最好写上全类名，否则可能会找不到特定的类-->
+    <select id="findById" resultType="Dept" parameterType="Long">
+		select deptno,dname,dbsource from dept where deptno=#{deptno};
+	</select>
+    <select id="findAll" resultType="Dept">
+		select deptno,dname,dbsource from dept;
+	</select>
+    <insert id="addDept" parameterType="Dept">
+		INSERT INTO dept(dname,dbsource) VALUES(#{dname},DATABASE());
+	</insert>
+
+</mapper>
+
+

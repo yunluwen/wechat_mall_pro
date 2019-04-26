@@ -1,0 +1,41 @@
+server:
+  port: 8001
+
+mybatis:
+  config-location: classpath:mybatis/mybatis.cfg.xml  # mybatis配置文件所在路径
+  type-aliases-package: com.zyh.cloud.entities        # 所有Entity别名类所在包,这里配置之后，mapper配置文件就不需要再配置了
+  mapper-locations:
+  - classpath:mybatis/mapper/**/*.xml                       # mapper映射文件
+
+spring:
+   application:
+    name: cloud-dept     # 很重要，对外暴露的微服务的名字 （在Eureka会变成全大写），做负载均衡的时候，这个不能改
+   datasource:
+    type: com.alibaba.druid.pool.DruidDataSource            # 当前数据源操作类型
+    driver-class-name: org.gjt.mm.mysql.Driver              # mysql驱动包
+    url: jdbc:mysql://localhost:3306/cloudDB01              # 数据库名称
+    username: root
+    password: 123456
+    dbcp2:
+      min-idle: 5                                           # 数据库连接池的最小维持连接数
+      initial-size: 5                                       # 初始化连接数
+      max-total: 5                                          # 最大连接数
+      max-wait-millis: 200                                  # 等待连接获取的最大超时时间
+
+# 注册微服务到Eureka服务器
+eureka:
+  client: #客户端注册进eureka服务列表内
+    service-url:
+#    单机Eureka下面的服务注册
+      defaultZone: http://localhost:7001/eureka
+#    集群Eureka下面的服务注册
+#      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+  instance:
+    instance-id: microservicecloud-dept8001-hystrix   # 注册后的服务的唯一标示信息
+    prefer-ip-address: true     # 访问路径可以显示IP地址
+
+info:    # 注册的微服务的服务扩展信息，用于给用户查看服务的详细信息
+  app.name: zyh-microservicecloud
+  company.name: www.zhangyunhao.com
+  build.artifactId: $project.artifactId$   # 这里用到了一个解析插件，这里有点问题，注意解决
+  build.version: $project.version$

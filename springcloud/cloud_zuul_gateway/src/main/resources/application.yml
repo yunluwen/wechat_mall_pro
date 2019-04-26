@@ -1,0 +1,36 @@
+server:
+  port: 9527
+
+spring:
+  application:
+    name: microservicecloud-zuul-gateway
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka
+#      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka,http://eureka7003.com:7003/eureka
+  instance:
+    instance-id: gateway-9527.com
+    prefer-ip-address: true
+
+# 没有采用路由
+#   http://localhost:8001/dept/get/1
+# 采用路由
+#   http://localhost:9527/zhangyunhao/mydept/dept/get/1
+# zuul 的配置，所有请求都要首先经过这里
+# 单入口原则
+zuul:
+  #ignored-services: microservicecloud-dept   # 封锁原入口，只能从新入口访问
+  prefix: /zhangyunhao                        # 统一的服务访问前缀
+  ignored-services: "*"                       # 封锁所有原入口
+  routes:
+    mydept.serviceId: microservicecloud-dept  # 原入口
+    mydept.path: /mydept/**           # 后面跟具体的接口信息 ，新入口
+
+info:
+  app.name: zhangyunhao-microcloud
+  company.name: www.zhangyunhao.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
+
