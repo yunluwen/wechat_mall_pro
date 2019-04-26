@@ -1,0 +1,35 @@
+
+server:
+  context-path: /sell  # 所有接口访问前缀
+  port: 8078
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123456
+    url: jdbc:mysql://127.0.0.1:3306/wechat_mall?characterEncoding=utf-8&useSSL=false
+  jpa:
+    show-sql: true
+  jackson:
+    default-property-inclusion: non_null
+  redis:
+    host: 127.0.0.1
+    port: 6379
+
+wechat:
+  mpAppId: wx5f8d852db7dddc9a                         # 公众号appId -- 测试号  -- 授权使用
+  mpAppSecret: 420cc348c8a096b900eb8e854dc38c28       # 公众号密钥  -- 测试号   -- 授权使用
+  openAppId: wx6ad144e54af67d87                       # 微信开放平台appId       -- 扫码登录使用
+  openAppSecret: 91a2ff6d38a2bbccfb7e9f9079108e2e     # 微信开放平台密钥         -- 扫码登录使用
+  mchId: 1483469312                                   # 商户号                 -- 支付使用
+  mchKey: 06C56A89949D617xxxxxxxxxxx                  # 商户密钥               -- 支付使用
+  keyPath: /var/weixin_cert/h5.p12                    # 商户证书路径: 这个是在微信公众号下载的，存到一个目录里面
+  notifyUrl: http://zhangyunhao.natapp1.cc/sell/pay/notify   # 微信支付异步通知地址
+  templateId:
+    orderStatus: e-Cqq67QxD6YNI41iRiqawEYdFavW_7pc7LyEMb-yeQ    # 微信模板id
+
+projectUrl:
+  wechatMpAuthorize: http://zhangyunhao.natapp1.cc     # 绑定的url地址
+  wechatOpenAuthorize: http://zhangyunhao.natapp1.cc
+  sell: http://zhangyunhao.natapp1.cc
